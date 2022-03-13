@@ -1,0 +1,30 @@
+create user 'java'@localhost indentified by 'passw123!@';
+grant all privileges on *.* to 'java'@localhost;
+
+create database dbcancerdemama;
+show databases;
+use dbcancerdemama();
+
+create table regiao(
+	id int auto_increment primary key, 
+	regiao varchar(20), 
+	total_exames int
+);
+
+create table faixa_etaria(
+	id int auto_increment primary key,
+	faixa_i int, faixa_n int,
+	descricao varchar (50)
+);
+
+create table ocorrencia_exame(
+	id int auto_increment primary key,
+	regiao_id int, mes int, 
+	faixa_id int, 
+	qnt_exames int);
+
+alter table ocorrencia_exame 
+	add constraint fk_ocorrencia_exame foreign key (regiao_id) references regiao (id);
+
+alter table ocorrencia_exame 
+	add constraint fk_faixa_etaria foreign key (faixa_id) references faixa_etaria (id);
